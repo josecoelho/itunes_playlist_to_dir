@@ -19,7 +19,7 @@ You will need to:
 * Clone this project to your machine:
 
 ```
-   git clone https://github....
+   git clone https://github.com/josecoelho/itunes_playlist_to_dir.git
    cd itunes_playlist_to_dir
 ```
 
