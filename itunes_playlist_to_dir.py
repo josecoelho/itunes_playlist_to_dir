@@ -44,8 +44,6 @@ def itunes_playlist_to_dir(playlist,toDir,copyToFormat):
             if(nextIsName):
                 metadata['name'] = i.text.replace("/","-")
             if(nextIsLocation):
-                print metadata
-
                 # if artist not found set as undefined
                 if not 'artist' in metadata.keys():
                     metadata['artist'] = 'undefined'
@@ -61,7 +59,9 @@ def itunes_playlist_to_dir(playlist,toDir,copyToFormat):
                 nextIsLocation = False
 
                 fromF= urllib2.unquote( i.text )
+                #removing junk from path
                 fromF = fromF.replace("file://localhost", '')
+                fromF = fromF.replace("file://", '')
 
                 extension = os.path.splitext(fromF)[1]
 
@@ -105,13 +105,16 @@ def itunes_playlist_to_dir(playlist,toDir,copyToFormat):
 
 
 if __name__ == '__main__':
-    playlist = sys.argv[1]
-    toDir = sys.argv[2]
-    copyToFormat = ''
-    if(3 < len(sys.argv)):
-      copyToFormat = sys.argv[3]
+    if(len(sys.argv) < 2):
+        print "Usage python itunes_playlist_to_dir.py <playlist> <toDir> [<copyToFormat>]"
+    else:
+        playlist = sys.argv[1]
+        toDir = sys.argv[2]
+        copyToFormat = ''
+        if(3 < len(sys.argv)):
+            copyToFormat = sys.argv[3]
 
-    itunes_playlist_to_dir(playlist,toDir,copyToFormat)
+        itunes_playlist_to_dir(playlist,toDir,copyToFormat)
 
 
 
